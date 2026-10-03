@@ -1,0 +1,91 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT">
+  <diagram id="L4UseCase" name="Trang-1">
+    <mxGraphModel dx="2002" dy="1095" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="boundary" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#000000;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="560" width="760" x="260" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="title" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=none;fontStyle=1;fontSize=18;align=center;verticalAlign=middle;" value="HỆ THỐNG PHÂN CÔNG KỸ THUẬT VIÊN &amp; LỊCH HẸN" vertex="1">
+          <mxGeometry height="40" width="760" x="260" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="actor" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=1;fontSize=14;" value="Nhân viên&lt;br&gt;điều phối" vertex="1">
+          <mxGeometry height="120" width="90" x="80" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="uc1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#000000;fontSize=14;" value="&lt;b&gt;UC1&lt;/b&gt;&lt;br&gt;Xem phiếu bảo hành&lt;br&gt;cần phân công" vertex="1">
+          <mxGeometry height="70" width="220" x="390" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="uc2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#000000;fontSize=14;" value="&lt;b&gt;UC2&lt;/b&gt;&lt;br&gt;Xem thông tin&lt;br&gt;kỹ thuật viên" vertex="1">
+          <mxGeometry height="70" width="220" x="390" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="uc3" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#000000;fontSize=14;" value="&lt;b&gt;UC3&lt;/b&gt;&lt;br&gt;Kiểm tra lịch&lt;br&gt;kỹ thuật viên" vertex="1">
+          <mxGeometry height="70" width="220" x="390" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="uc4" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#000000;fontSize=14;fontStyle=1;" value="&lt;b&gt;UC4&lt;/b&gt;&lt;br&gt;Phân công&lt;br&gt;kỹ thuật viên" vertex="1">
+          <mxGeometry height="70" width="220" x="390" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="uc5" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#000000;fontSize=14;" value="&lt;b&gt;UC5&lt;/b&gt;&lt;br&gt;Tạo lịch hẹn&lt;br&gt;giao/nhận máy" vertex="1">
+          <mxGeometry height="70" width="220" x="390" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="uc8" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#000000;fontSize=14;" value="&lt;b&gt;UC8&lt;/b&gt;&lt;br&gt;Xem danh sách&lt;br&gt;lịch hẹn" vertex="1">
+          <mxGeometry height="70" width="220" x="390" y="515" as="geometry" />
+        </mxCell>
+        <mxCell id="uc6" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#000000;fontSize=14;" value="&lt;b&gt;UC6&lt;/b&gt;&lt;br&gt;Kiểm tra&lt;br&gt;trùng lịch" vertex="1">
+          <mxGeometry height="70" width="180" x="760" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="uc7" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#000000;fontSize=14;" value="&lt;b&gt;UC7&lt;/b&gt;&lt;br&gt;Xác nhận lịch hẹn&lt;br&gt;và phân công" vertex="1">
+          <mxGeometry height="70" width="180" x="760" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;" target="uc1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;" target="uc2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;" target="uc3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;" target="uc4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;" target="uc5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" edge="1" parent="1" source="actor" style="endArrow=none;html=1;rounded=0;" target="uc8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc1" edge="1" parent="1" source="uc4" style="dashed=1;endArrow=open;endFill=0;html=1;rounded=0;" target="uc6" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc2" edge="1" parent="1" source="uc5" style="dashed=1;endArrow=open;endFill=0;html=1;rounded=0;" target="uc6" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inc3" edge="1" parent="1" source="uc5" style="dashed=1;endArrow=open;endFill=0;html=1;rounded=0;" target="uc7" value="«include»">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#000000;fontSize=13;align=left;verticalAlign=top;spacing=12;" value="&lt;b&gt;Chú thích&lt;/b&gt;&lt;br&gt;&lt;br&gt;👤 Actor&lt;br&gt;&lt;br&gt;🔵 Use case chính&lt;br&gt;&lt;br&gt;🟡 Use case được bao gồm (include)&lt;br&gt;&lt;br&gt;- - - → Quan hệ «include»" vertex="1">
+          <mxGeometry height="220" width="270" x="1050" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="spec_title" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=18;" value="ĐẶC TẢ USE CASE UC4 – PHÂN CÔNG KỸ THUẬT VIÊN" vertex="1">
+          <mxGeometry height="42" width="1280" x="40" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="info" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=13;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;1. Thông tin chung&lt;/b&gt;&lt;br&gt;&lt;br&gt; &lt;b&gt;Mã Use Case:&lt;/b&gt; UC4&lt;br&gt; &lt;b&gt;Tên Use Case:&lt;/b&gt; Phân công kỹ thuật viên&lt;br&gt; &lt;b&gt;Actor chính:&lt;/b&gt; Nhân viên điều phối&lt;br&gt; &lt;b&gt;Mục tiêu:&lt;/b&gt; Phân công kỹ thuật viên phù hợp cho phiếu bảo hành&lt;br&gt; &lt;b&gt;Phạm vi:&lt;/b&gt; Hệ thống Phân công kỹ thuật viên &amp;amp; Lịch hẹn&lt;br&gt; &lt;b&gt;Mức ưu tiên:&lt;/b&gt; MUST&lt;br&gt; &lt;b&gt;Liên quan:&lt;/b&gt; UC2, UC3, UC6, UC7" vertex="1">
+          <mxGeometry height="260" width="360" x="40" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="pre" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=13;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;2. Tiền điều kiện&lt;/b&gt;&lt;br&gt;&lt;br&gt; • Phiếu bảo hành tồn tại và đang chờ phân công.&lt;br&gt;&lt;br&gt; • Dữ liệu kỹ thuật viên đã có trong hệ thống." vertex="1">
+          <mxGeometry height="150" width="360" x="40" y="945" as="geometry" />
+        </mxCell>
+        <mxCell id="main" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=13;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;3. Luồng chính (Main Flow)&lt;/b&gt;&lt;br&gt;&lt;br&gt; &lt;b&gt;1.&lt;/b&gt; NV điều phối chọn phiếu bảo hành cần xử lý.&lt;br&gt; → Hệ thống hiển thị thông tin phiếu bảo hành.&lt;br&gt;&lt;br&gt; &lt;b&gt;2.&lt;/b&gt; Xem danh sách kỹ thuật viên.&lt;br&gt; → Hiển thị tay nghề, địa bàn và khối lượng công việc hiện tại.&lt;br&gt;&lt;br&gt; &lt;b&gt;3.&lt;/b&gt; Chọn kỹ thuật viên phù hợp.&lt;br&gt; → Hiển thị lịch làm việc của kỹ thuật viên.&lt;br&gt;&lt;br&gt; &lt;b&gt;4.&lt;/b&gt; Xác nhận phân công.&lt;br&gt; → Kiểm tra điều kiện: kỹ thuật viên phù hợp, khả dụng.&lt;br&gt;&lt;br&gt; &lt;b&gt;5.&lt;/b&gt; Hệ thống lưu kỹ thuật viên phụ trách cho phiếu bảo hành.&lt;br&gt;&lt;br&gt; &lt;b&gt;6.&lt;/b&gt; Hệ thống thông báo phân công thành công." vertex="1">
+          <mxGeometry height="425" width="430" x="420" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="alt" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=13;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;4. Luồng ngoại lệ (Alternative Flow)&lt;/b&gt;&lt;br&gt;&lt;br&gt; &lt;b&gt;4a. Không có kỹ thuật viên phù hợp:&lt;/b&gt;&lt;br&gt; • Hệ thống thông báo không tìm thấy kỹ thuật viên phù hợp.&lt;br&gt; • Nhân viên điều phối quay lại bước 2 để tìm lại.&lt;br&gt;&lt;br&gt; &lt;b&gt;6a. Kỹ thuật viên bị trùng lịch:&lt;/b&gt;&lt;br&gt; • Hệ thống cảnh báo trùng lịch.&lt;br&gt; • Không cho xác nhận phân công.&lt;br&gt; • Nhân viên điều phối chọn kỹ thuật viên hoặc thời gian khác.&lt;br&gt;&lt;br&gt; &lt;b&gt;6b. Kỹ thuật viên không khả dụng (đã đầy công việc):&lt;/b&gt;&lt;br&gt; • Hệ thống thông báo kỹ thuật viên không khả dụng.&lt;br&gt; • Nhân viên điều phối chọn kỹ thuật viên khác." vertex="1">
+          <mxGeometry height="320" width="450" x="870" y="670" as="geometry" />
+        </mxCell>
+        <mxCell id="post" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;fontSize=13;align=left;verticalAlign=top;spacing=10;" value="&lt;b&gt;5. Hậu điều kiện&lt;/b&gt;&lt;br&gt;&lt;br&gt; • Phiếu bảo hành được gán cho một kỹ thuật viên phù hợp.&lt;br&gt; • Thông tin phân công được lưu trong hệ thống." vertex="1">
+          <mxGeometry height="90" width="450" x="870" y="1005" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
