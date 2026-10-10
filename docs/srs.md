@@ -8,7 +8,7 @@
 ---
 
 ## 1. GIỚI THIỆU VÀ PHẠM VI
-
+    git status
 ### 1.1. Mục tiêu
 
 Hệ thống hỗ trợ nhân viên điều phối phân công kỹ thuật viên xử lý phiếu bảo hành và quản lý lịch hẹn giao/nhận máy. Việc lựa chọn kỹ thuật viên dựa trên tay nghề, địa bàn, khối lượng công việc hiện tại và lịch làm việc nhằm hạn chế tình trạng phân công không phù hợp hoặc trùng lịch.
@@ -161,9 +161,9 @@ Hệ thống trong phạm vi L4 không thực hiện:
 
 | Mã | Yêu cầu phi chức năng |
 |---|---|
-| NFR1 | 95% yêu cầu xem danh sách phiếu, kỹ thuật viên và lịch hẹn phải có thời gian phản hồi không quá 2 giây trong điều kiện thử nghiệm với 100 bản ghi mô phỏng. |
-| NFR2 | Hệ thống phải kiểm tra dữ liệu bắt buộc trước khi lưu và không cho phép xác nhận lịch hẹn nếu phát hiện trùng lịch của cùng một kỹ thuật viên. |
-| NFR3 | Các API thuộc phạm vi L4 phải trả về mã trạng thái HTTP phù hợp và phản hồi lỗi có thông báo để xác định nguyên nhân khi dữ liệu đầu vào không hợp lệ. |
+| NFR1 | 95% yêu cầu xem danh sách phiếu bảo hành, kỹ thuật viên và lịch hẹn phải có thời gian phản hồi không quá 2 giây trong điều kiện thử nghiệm với 100 bản ghi mô phỏng. |
+| NFR2 | 100% yêu cầu tạo hoặc xác nhận lịch hẹn phải được hệ thống kiểm tra dữ liệu bắt buộc và xung đột thời gian trước khi lưu; không cho phép lưu nếu phát hiện hai lịch của cùng một kỹ thuật viên bị chồng lấn. |
+| NFR3 | 100% API thuộc phạm vi L4 phải trả về mã trạng thái HTTP theo kết quả xử lý; các yêu cầu có dữ liệu đầu vào không hợp lệ phải trả về phản hồi lỗi có mã lỗi và thông báo xác định nguyên nhân. |
 
 ---
 
@@ -204,4 +204,4 @@ Hệ thống trong phạm vi L4 không thực hiện:
 | FR5 | US5 | UC5 – Tạo lịch hẹn giao/nhận máy | MUST |
 | FR6 | US6 | UC6 – Kiểm tra trùng lịch | MUST |
 | FR7 | US7 | UC7 – Xác nhận lịch hẹn và phân công | SHOULD |
-| FR8 | US8 | UC8 – Xem danh sách lịch hẹn | COULD |s
+| FR8 | US8 | UC8 – Xem danh sách lịch hẹn | COULD |
