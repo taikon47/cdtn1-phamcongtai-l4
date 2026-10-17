@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b33">
+  <title>Smart CRM — Mekong Mobile</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">M</div>
+        <div><strong>MEKONG MOBILE</strong><small>SMART CRM · L4</small></div>
+      </div>
+      <div class="side-caption">KHÔNG GIAN ĐIỀU PHỐI</div>
+      <nav class="nav" aria-label="Điều hướng chính">
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">▦</span>Tổng quan</button>
+        <button class="nav-item" data-view="tickets"><span class="nav-icon">▤</span>Phiếu bảo hành <span class="nav-count" id="nav-ticket-count">—</span></button>
+        <button class="nav-item" data-view="technicians"><span class="nav-icon">♙</span>Kỹ thuật viên</button>
+        <button class="nav-item" data-view="appointments"><span class="nav-icon">▦</span>Lịch hẹn</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="status-dot"></div>
+        <div><strong id="api-status">Đang kết nối API</strong><small>Spring Boot · PostgreSQL</small></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">SMART CRM / OPERATIONS</div>
+          <h1 id="page-title">Tổng quan điều phối</h1>
+        </div>
+        <div class="top-actions">
+          <span class="date-chip" id="today-chip"></span>
+          <button class="icon-button" id="refresh-all" title="Tải lại dữ liệu" aria-label="Tải lại dữ liệu">↻</button>
+          <div class="user-chip"><div class="avatar">ĐP</div><div><strong>Điều phối viên</strong><small>Nhân sự vận hành</small></div></div>
+        </div>
+      </header>
+
+      <div id="global-alert" class="alert hidden" role="alert"></div>
+
+      <section class="view active" id="view-overview">
+        <div class="welcome">
+          <div><p class="eyebrow light">BẢNG ĐIỀU KHIỂN L4</p><h2>Đúng người. Đúng lịch. Đúng hẹn.</h2>
+          <p>Theo dõi phiếu bảo hành, năng lực kỹ thuật viên và lịch giao/nhận thiết bị trên cùng một màn hình.</p></div>
+          <div class="welcome-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="device">▣</div><div class="spark">✦</div></div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Phiếu chờ phân công</span><span class="stat-icon amber">▤</span></div><strong id="stat-unassigned">—</strong><small>Đang cần điều phối</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Kỹ thuật viên</span><span class="stat-icon blue">♙</span></div><strong id="stat-techs">—</strong><small id="stat-tech-sub">Tổng nhân sự kỹ thuật</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Lịch hẹn</span><span class="stat-icon violet">◷</span></div><strong id="stat-appointments">—</strong><small>Lịch đã ghi nhận</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Lịch cần xác nhận</span><span class="stat-icon green">✓</span></div><strong id="stat-pending">—</strong><small>Đang chờ xác nhận</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Lịch đã xác nhận</span><span class="stat-icon blue">✓</span></div><strong id="stat-confirmed">—</strong><small>Đã được xác nhận</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Lịch sắp diễn ra</span><span class="stat-icon violet">◷</span></div><strong id="stat-upcoming">—</strong><small>Chưa bị hủy, thời gian chưa qua</small></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel">
+            <div class="panel-heading"><div><h3>Phiếu cần xử lý</h3><p>Danh sách lấy trực tiếp từ API</p></div><button class="text-button" data-go="tickets">Xem tất cả <span>→</span></button></div>
+            <div id="overview-tickets" class="table-wrap"><div class="state loading"><span class="spinner"></span>Đang tải dữ liệu phiếu…</div></div>
+          </section>
+          <section class="panel">
+            <div class="panel-heading"><div><h3>Lịch hẹn gần đây</h3><p>Ưu tiên các lịch sắp diễn ra</p></div><button class="text-button" data-go="appointments">Xem lịch <span>→</span></button></div>
+            <div id="overview-appointments"><div class="state loading"><span class="spinner"></span>Đang tải lịch hẹn…</div></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="view-tickets">
+        <div class="page-intro"><div><h2>Phiếu bảo hành</h2><p>Tra cứu phiếu và phân công kỹ thuật viên phù hợp theo tay nghề, khu vực và tình trạng sẵn sàng.</p></div><button class="btn btn-primary" id="reload-tickets">↻ Tải lại</button></div>
+        <div class="toolbar">
+          <label class="searchbox"><span>⌕</span><input id="ticket-search" type="search" placeholder="Tìm mã phiếu, khách hàng, thiết bị…"></label>
+          <select id="ticket-status" aria-label="Lọc trạng thái"><option value="UNASSIGNED">Chờ phân công</option><option value="ASSIGNED">Đã phân công</option><option value="ALL">Tất cả trạng thái</option></select>
+        </div>
+        <section class="panel"><div id="tickets-table" class="table-wrap"><div class="state loading"><span class="spinner"></span>Đang tải phiếu…</div></div></section>
+      </section>
+
+      <section class="view" id="view-technicians">
+        <div class="page-intro"><div><h2>Đội ngũ kỹ thuật viên</h2><p>Đối chiếu chuyên môn, địa bàn phục vụ và khối lượng công việc trước khi phân công.</p></div><button class="btn btn-primary" id="reload-techs">↻ Tải lại</button></div>
+        <div class="toolbar"><label class="searchbox"><span>⌕</span><input id="tech-search" type="search" placeholder="Tìm tên, tay nghề hoặc khu vực…"></label><select id="tech-availability"><option value="ALL">Tất cả trạng thái</option><option value="AVAILABLE">Sẵn sàng</option><option value="BUSY">Đang bận</option></select></div>
+        <section class="panel"><div id="technicians-table" class="table-wrap"><div class="state loading"><span class="spinner"></span>Đang tải kỹ thuật viên…</div></div></section>
+      </section>
+
+      <section class="view" id="view-appointments">
+        <div class="page-intro"><div><h2>Lịch hẹn giao / nhận</h2><p>Tạo lịch, kiểm tra trùng khung giờ và xác nhận lịch hẹn.</p></div><button class="btn btn-primary" id="reload-appointments">↻ Tải lại</button></div>
+        <div class="content-grid appointment-grid">
+          <section class="panel">
+            <div class="panel-heading"><div><h3>Tạo lịch hẹn mới</h3><p>Thông tin được kiểm tra trước khi lưu</p></div></div>
+            <form id="appointment-form" class="form-grid">
+              <label class="field full"><span>Phiếu bảo hành</span><select id="appointment-ticket" required><option value="">Chọn phiếu…</option></select></label>
+              <label class="field full"><span>Kỹ thuật viên</span><select id="appointment-tech" required><option value="">Chọn kỹ thuật viên…</option></select></label>
+              <label class="field"><span>Loại lịch</span><select id="appointment-type" required><option value="RECEIVE">Nhận thiết bị</option><option value="RETURN">Trả thiết bị</option></select></label>
+              <label class="field"><span>Ngày hẹn</span><input id="appointment-date" type="date" required></label>
+              <label class="field"><span>Giờ bắt đầu</span><input id="appointment-start" type="time" value="09:00" required></label>
+              <label class="field"><span>Giờ kết thúc</span><input id="appointment-end" type="time" value="10:00" required></label>
+              <div class="form-actions full"><button type="button" class="btn btn-secondary" id="check-conflict">Kiểm tra trùng lịch</button><button type="submit" class="btn btn-primary">Tạo lịch hẹn</button></div>
+              <div id="appointment-feedback" class="feedback full hidden" role="status"></div>
+            </form>
+          </section>
+          <section class="panel">
+            <div class="panel-heading"><div><h3>Danh sách lịch hẹn</h3><p>Lọc theo ngày, trạng thái hoặc kỹ thuật viên</p></div></div>
+            <div class="toolbar appointment-toolbar" role="group" aria-label="Bộ lọc lịch hẹn">
+              <input type="date" id="appointment-filter-date" aria-label="Lọc theo ngày">
+              <select id="appointment-filter-status" aria-label="Lọc theo trạng thái">
+                <option value="ALL">Tất cả trạng thái</option>
+                <option value="PENDING">Chờ xác nhận</option>
+                <option value="CONFIRMED">Đã xác nhận</option>
+                <option value="CANCELLED">Đã hủy</option>
+                <option value="COMPLETED">Hoàn tất</option>
+              </select>
+              <select id="appointment-filter-tech" aria-label="Lọc theo kỹ thuật viên">
+                <option value="ALL">Tất cả kỹ thuật viên</option>
+              </select>
+              <button type="button" class="btn btn-secondary" id="clear-appointment-filters">Xóa lọc</button>
+            </div>
+            <div id="appointments-table" class="table-wrap"><div class="state loading"><span class="spinner"></span>Đang tải lịch…</div></div>
+          </section>
+        </div>
+      </section>
+
+      <footer class="footer"><span>SMART CRM · MEKONG MOBILE</span><span>Luồng L4 — Phân công kỹ thuật viên & lịch hẹn</span></footer>
+    </main>
+  </div>
+
+  <dialog id="assign-dialog" class="dialog">
+    <form method="dialog" class="dialog-head"><div><p class="eyebrow">PHÂN CÔNG PHIẾU</p><h3 id="assign-title">Chọn kỹ thuật viên</h3></div><button class="icon-button" aria-label="Đóng">×</button></form>
+    <div class="dialog-body"><p id="assign-ticket-summary" class="muted"></p><label class="field"><span>Kỹ thuật viên phù hợp</span><select id="assign-tech" required></select></label><p class="hint">Hệ thống chỉ chấp nhận kỹ thuật viên đang sẵn sàng, đúng tay nghề và đúng khu vực dịch vụ.</p><div id="assign-feedback" class="feedback hidden" role="status"></div></div>
+    <div class="dialog-actions"><button class="btn btn-secondary" id="cancel-assign">Hủy</button><button class="btn btn-primary" id="confirm-assign">Xác nhận phân công</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/js/api-client.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

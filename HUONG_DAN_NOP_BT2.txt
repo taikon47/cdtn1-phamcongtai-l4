@@ -1,0 +1,12 @@
+SMART CRM L4 – BẢN BÀN GIAO BT2
+
+1. Báo cáo chính: BAO_CAO_BT2_SMART_CRM_L4.docx và .pdf (cùng nội dung).
+2. Mã nguồn: src/main; 8 ca test nghiệp vụ bổ sung: src/test/java/.../L4ApiControllerBusinessTests.java.
+3. Tài liệu test: docs/kiem-thu-bt2.md.
+4. Windows PowerShell tại PROJECTL4:
+   $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-21.0.12.101-hotspot'
+   $env:Path = "$env:JAVA_HOME\bin;$env:Path"
+   .\mvnw.cmd clean test
+5. CẦN CHẠY LẠI: môi trường biên soạn không tải được Maven 3.10.0 từ kho Maven, vì vậy chưa xác nhận PASS cho 8 ca mới. Log của người dùng trước đó: BUILD SUCCESS với 1 test khởi động.
+6. CẦN BỔ SUNG: ảnh chụp giao diện thật và ảnh log test PASS; đẩy GitHub và tạo tag v0.2 theo yêu cầu.
+7. Bảng phần trăm AI trong Word là ƯỚC TÍNH, cần sinh viên tự xác nhận trước khi nộp.

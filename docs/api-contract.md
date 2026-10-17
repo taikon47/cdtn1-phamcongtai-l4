@@ -5,6 +5,8 @@
 **Track:** SE  
 **Base URL:** `/api/v1`
 
+**Quy ước BT2:** Mỗi kỹ thuật viên có một tay nghề chính (`skill`) theo DDL hiện tại; nếu cần nhiều tay nghề sẽ mở rộng mô hình ở giai đoạn sau.
+
 ---
 
 ## 1. Mục đích
@@ -78,7 +80,7 @@ GET /api/v1/technicians
   {
     "technicianId": 201,
     "fullName": "Tran Van B",
-    "skills": ["SCREEN", "BATTERY"],
+    "skill": "SCREEN",
     "area": "Quan 1",
     "currentWorkload": 3
   }
@@ -361,3 +363,21 @@ Các API sử dụng cấu trúc lỗi thống nhất:
 | US6 | FR6 | API6 |
 | US7 | FR7 | API7 |
 | US8 | FR8 | API8 |
+
+## API bổ sung cho quản lý lịch hẹn
+
+### Hủy lịch hẹn
+- **Method:** `PATCH`
+- **Path:** `/api/v1/appointments/{appointmentId}/cancel`
+- **Thành công:** trả về đối tượng lịch hẹn với `status = CANCELLED`.
+- **Quy tắc:** không tìm thấy ID trả về 404; lịch `COMPLETED` không thể hủy và trả về 409; lịch đã `CANCELLED` có thể gọi lại an toàn.
+
+### Bộ lọc lịch hẹn
+Giao diện lọc danh sách API `GET /api/v1/appointments` theo ngày bắt đầu, trạng thái và kỹ thuật viên. Bộ lọc được áp dụng phía trình duyệt, không sửa dữ liệu hoặc trạng thái trong cơ sở dữ liệu.
+
+### Thống kê tổng quan
+Các thẻ thống kê được tính từ dữ liệu API:
+- Tổng lịch hẹn đã ghi nhận.
+- Lịch chờ xác nhận (`PENDING`).
+- Lịch đã xác nhận (`CONFIRMED`).
+- Lịch sắp diễn ra: thời điểm bắt đầu chưa qua và trạng thái không phải `CANCELLED` hoặc `COMPLETED`.

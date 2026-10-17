@@ -10,7 +10,7 @@ CREATE TABLE warranty_ticket (
     issue_description TEXT,
     required_skill VARCHAR(100) NOT NULL,
     service_area VARCHAR(100) NOT NULL,
-    status VARCHAR(30) NOT NULL DEFAULT 'WAITING_ASSIGNMENT',
+    status VARCHAR(30) NOT NULL DEFAULT 'UNASSIGNED',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -41,7 +41,7 @@ CREATE TABLE appointment (
     ticket_id BIGINT NOT NULL,
     technician_id BIGINT NOT NULL,
     appointment_type VARCHAR(20) NOT NULL
-        CHECK (appointment_type IN ('DELIVERY', 'RECEIPT')),
+        CHECK (appointment_type IN ('RECEIVE', 'RETURN')),
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     status VARCHAR(30) NOT NULL DEFAULT 'PENDING',

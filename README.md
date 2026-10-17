@@ -22,7 +22,9 @@ Hệ thống hỗ trợ:
 - Phân công kỹ thuật viên cho phiếu bảo hành.
 - Tạo lịch hẹn giao/nhận máy.
 - Kiểm tra và ngăn chặn trùng lịch.
-- Xác nhận lịch hẹn và kết quả phân công.
+- Xác nhận hoặc hủy lịch hẹn; không cho hủy lịch đã hoàn tất.
+- Lọc danh sách lịch hẹn theo ngày, trạng thái và kỹ thuật viên.
+- Theo dõi thống kê tổng quan: phiếu chờ phân công, kỹ thuật viên, tổng lịch, lịch chờ xác nhận, lịch đã xác nhận và lịch sắp diễn ra.
 - Xem danh sách lịch hẹn.
 
 ---
@@ -100,7 +102,19 @@ PROJECTL4/
 
 ---
 
-## 6. Trạng thái hiện tại
+## 6. Chạy nhanh sau khi giải nén
+
+Yêu cầu: JDK 21, PostgreSQL đang chạy, database `projectl4` đã được khởi tạo và cấu hình kết nối đúng trong `src/main/resources/application.properties`.
+
+Mở PowerShell tại thư mục `PROJECTL4` và chạy một lệnh:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\kiem-tra-va-chay.ps1
+```
+
+Script sẽ chạy `clean test package`; nếu kiểm thử thành công, ứng dụng sẽ khởi động bằng Spring Boot. Mở `http://localhost:8081/`. Nếu cổng 8081 đã được dùng, hãy đóng ứng dụng đang chạy trước khi chạy lại script.
+
+## 7. Trạng thái hiện tại
 
 ### Đã hoàn thành
 
@@ -140,3 +154,20 @@ Các tài liệu yêu cầu và thiết kế có thể tiếp tục được c�
 Việc sử dụng công cụ AI được khai báo tại:
 
 `docs/ai-disclosure.md`
+
+### Các phần bổ sung trong bản cập nhật L4
+
+- **Hủy lịch hẹn:** `PATCH /api/v1/appointments/{appointmentId}/cancel`; lịch đã hoàn tất không thể bị hủy.
+- **Lọc lịch hẹn:** lọc tại giao diện theo ngày, trạng thái và kỹ thuật viên; không thay đổi dữ liệu gốc từ API.
+- **Thống kê tổng quan:** tổng số lịch, lịch chờ xác nhận, lịch đã xác nhận và lịch sắp diễn ra được tính từ dữ liệu API thật.
+- **Phản hồi giao diện:** có xác nhận trước khi hủy, trạng thái đang xử lý và thông báo thành công/lỗi.
+
+Lưu ý: cần chạy ứng dụng với PostgreSQL của máy và tự chụp ảnh màn hình thực tế để bổ sung vào báo cáo trước khi nộp. Không xem các ảnh placeholder trong bản báo cáo là bằng chứng kiểm thử.
+
+## 9. Kiểm thử BT2 (bản bàn giao)
+
+Chạy `./mvnw.cmd clean test` trên Windows sau khi đặt `JAVA_HOME` trỏ tới JDK 21. Thư mục `src/test/java` chứa bài kiểm tra khởi động Spring Boot và 8 bài kiểm tra quy tắc nghiệp vụ độc lập với database: tạo lịch hợp lệ, khoảng giờ sát nhau, trùng giờ, giờ không hợp lệ, ngày quá khứ, hủy lịch đã xác nhận, từ chối hủy lịch hoàn tất và xác nhận lịch chờ.
+
+**Lưu ý:** Bài kiểm tra sát giờ dùng repository mock để mô phỏng không trùng lịch; chưa phải integration test xác minh truy vấn SQL thực tế. Test khởi động ứng dụng yêu cầu PostgreSQL theo `application.properties`. Cần chạy lại trên máy nộp bài và lưu log thực tế.
+
+**Đính chính tiến độ:** Các checklist "chưa hoàn thành" tại mục 7 phía trên phản ánh trạng thái BT1 trước khi triển khai. Trong BT2 hiện đã có Java/Spring Boot, PostgreSQL/Flyway, REST API và bộ test tại `src/test/java`.
