@@ -1,0 +1,305 @@
+﻿* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  background: #f3f6fa;
+  color: #172033;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+header {
+  padding: 28px max(24px, calc((100vw - 1180px) / 2));
+  background: #10233f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+header h1 {
+  margin: 5px 0;
+  font-size: 27px;
+}
+
+header p {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.brand,
+.eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.brand {
+  color: #66c7ff;
+}
+
+.api-status {
+  padding: 10px 14px;
+  border: 1px solid #ffffff33;
+  border-radius: 999px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.api-status span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: #57dc8b;
+}
+
+nav {
+  padding: 0 max(24px, calc((100vw - 1180px) / 2));
+  background: white;
+  border-bottom: 1px solid #dfe5ed;
+  display: flex;
+  gap: 4px;
+}
+
+nav button {
+  border: 0;
+  background: transparent;
+  padding: 17px 20px;
+  color: #64748b;
+  font-weight: 700;
+  border-bottom: 3px solid transparent;
+}
+
+nav button.active {
+  color: #0d67b5;
+  border-bottom-color: #0d67b5;
+}
+
+main {
+  max-width: 1180px;
+  margin: 28px auto;
+  padding: 0 24px;
+}
+
+.panel {
+  background: white;
+  border: 1px solid #e0e6ee;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 5px 22px rgba(25, 43, 70, 0.06);
+}
+
+.panel-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.panel-title h2 {
+  margin: 5px 0 0;
+}
+
+.eyebrow {
+  color: #0d67b5;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid #edf0f4;
+}
+
+th {
+  color: #64748b;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:hover,
+tbody tr.selected {
+  background: #f0f7ff;
+}
+
+.badge {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #fff1d6;
+  color: #945c00;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.state {
+  padding: 35px;
+  text-align: center;
+  border-radius: 10px;
+  background: #f7f9fc;
+  color: #64748b;
+}
+
+.state.error {
+  color: #a52525;
+  background: #fff1f1;
+}
+
+.state.error span {
+  display: block;
+  margin-top: 5px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.detail-grid > div,
+.description,
+.selected-ticket {
+  padding: 16px;
+  border-radius: 10px;
+  background: #f7f9fc;
+}
+
+.detail-grid label,
+.description label,
+form > label,
+.selected-ticket span {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.description {
+  margin: 15px 0;
+}
+
+.description p {
+  margin: 0;
+}
+
+.selected-ticket {
+  margin-bottom: 18px;
+}
+
+.selected-ticket strong,
+.selected-ticket small {
+  display: block;
+}
+
+.selected-ticket small {
+  margin-top: 5px;
+  color: #64748b;
+}
+
+select {
+  width: 100%;
+  margin: 7px 0 18px;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: white;
+}
+
+.primary,
+.secondary {
+  border-radius: 8px;
+  padding: 11px 16px;
+  font-weight: 700;
+}
+
+.primary {
+  border: 0;
+  background: #0d67b5;
+  color: white;
+}
+
+.primary:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.secondary {
+  background: white;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+
+.inline-error,
+.success {
+  padding: 11px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.inline-error {
+  background: #fff1f1;
+  color: #a52525;
+}
+
+.success {
+  background: #ecfdf3;
+  color: #187744;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+@media (max-width: 720px) {
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  nav {
+    overflow-x: auto;
+  }
+
+  nav button {
+    white-space: nowrap;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
