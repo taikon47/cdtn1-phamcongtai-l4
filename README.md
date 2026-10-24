@@ -1,61 +1,181 @@
-# SMART CRM – MEKONG MOBILE
+﻿# SMART CRM – MEKONG MOBILE
 
 ## L4 – Phân công kỹ thuật viên & lịch hẹn
 
 **Sinh viên:** Phạm Công Tài  
 **MSSV:** 2374802010445  
-**Track:** SE  
+**Track:** Software Engineering (SE)  
 **Học phần:** Chuyên đề Tốt nghiệp 1  
-**Học kỳ:** HK1 – Năm học 2026–2027  
+**Học kỳ:** HK1 – Năm học 2026–2027
 
 ---
 
-## 1. Mục tiêu
+## 1. Mục tiêu dự án
 
-Xây dựng chức năng hỗ trợ nhân viên điều phối phân công kỹ thuật viên và quản lý lịch hẹn trong hệ thống Smart CRM – Mekong Mobile.
+Smart CRM – Mekong Mobile hỗ trợ quy trình tiếp nhận và xử lý phiếu bảo hành.
 
-Hệ thống hỗ trợ:
+Luồng nghiệp vụ chính:
 
-- Xem các phiếu bảo hành đang cần phân công.
-- Xem thông tin tay nghề, địa bàn và khối lượng công việc của kỹ thuật viên.
-- Kiểm tra lịch làm việc của kỹ thuật viên.
-- Phân công kỹ thuật viên cho phiếu bảo hành.
-- Tạo lịch hẹn giao/nhận máy.
-- Kiểm tra và ngăn chặn trùng lịch.
-- Xác nhận hoặc hủy lịch hẹn; không cho hủy lịch đã hoàn tất.
-- Lọc danh sách lịch hẹn theo ngày, trạng thái và kỹ thuật viên.
-- Theo dõi thống kê tổng quan: phiếu chờ phân công, kỹ thuật viên, tổng lịch, lịch chờ xác nhận, lịch đã xác nhận và lịch sắp diễn ra.
-- Xem danh sách lịch hẹn.
+1. Xem danh sách phiếu bảo hành chưa được phân công.
+2. Xem chi tiết phiếu bảo hành.
+3. Xem danh sách kỹ thuật viên.
+4. Chọn và phân công kỹ thuật viên phù hợp.
+5. Tạo và quản lý lịch hẹn.
+6. Kiểm tra xung đột lịch.
+7. Xác nhận hoặc hủy lịch hẹn.
+
+Trong Sprint 2, hệ thống được bổ sung frontend React và tích hợp với REST API Spring Boot để thực hiện luồng nghiệp vụ End-to-End trên dữ liệu PostgreSQL thực tế.
 
 ---
 
-## 2. Yêu cầu môi trường
+## 2. Công nghệ sử dụng
 
-### Công nghệ dự kiến
+### Backend
 
-| Thành phần | Công nghệ |
-|---|---|
-| Ngôn ngữ | Java 21 |
-| Framework | Spring Boot |
-| Cơ sở dữ liệu | PostgreSQL |
-| Quản lý mã nguồn | Git / GitHub |
-| Thiết kế sơ đồ | draw.io |
-| IDE | Visual Studio Code |
+- Java 21
+- Spring Boot
+- Spring Data JPA
+- Maven
+- Flyway
 
-### Yêu cầu cài đặt
+### Database
+
+- PostgreSQL 17
+
+### Frontend
+
+- React 19
+- Vite
+- JavaScript
+- HTML/CSS
+- Oxlint
+
+### Kiểm thử
+
+- Spring Boot Test
+- JUnit
+- Maven Test
+- Oxlint
+- Vite Production Build
+
+---
+
+## 3. Hướng dẫn cài đặt và chạy hệ thống
+
+### 3.1. Yêu cầu môi trường
+
+Cài đặt các công cụ sau:
 
 - JDK 21
-- PostgreSQL
-- Git
-- Visual Studio Code hoặc IDE hỗ trợ Java
-- Trình duyệt web
-- draw.io / diagrams.net
+- PostgreSQL 17
+- Node.js
+- npm
 
----
+Database sử dụng:
 
-## 3. Phạm vi
+`projectl4`
 
-Nhân viên điều phối tiếp nhận phiếu bảo hành cần xử lý, lựa chọn và phân công kỹ thuật viên phù hợp dựa trên tay nghề, địa bàn và khối lượng công việc hiện tại, sau đó đặt lịch hẹn giao/nhận máy, kiểm tra trùng lịch và kết thúc khi lịch hẹn cùng kỹ thuật viên phụ trách được xác nhận.
+### 3.2. Clone repository
+
+```powershell
+git clone https://github.com/taikon47/cdtn1-phamcongtai-l4.git
+```
+
+### 3.3. Di chuyển vào thư mục project
+
+```powershell
+cd cdtn1-phamcongtai-l4
+```
+
+### 3.4. Kiểm tra Java
+
+```powershell
+java -version
+```
+
+### 3.5. Kiểm tra PostgreSQL
+
+```powershell
+psql --version
+```
+
+Nếu `psql` chưa được thêm vào PATH trên Windows, có thể kiểm tra trực tiếp:
+
+```powershell
+& "C:\Program Files\PostgreSQL\17\bin\psql.exe" --version
+```
+
+### 3.6. Chạy kiểm thử backend
+
+```powershell
+.\mvnw.cmd clean test
+```
+
+Kết quả kiểm thử gần nhất:
+
+```text
+Tests run: 9
+Failures: 0
+Errors: 0
+Skipped: 0
+BUILD SUCCESS
+```
+
+### 3.7. Khởi động backend
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+Backend chạy tại:
+
+`http://localhost:8081`
+
+Giữ terminal backend đang chạy.
+
+### 3.8. Mở terminal thứ hai và vào frontend
+
+```powershell
+cd frontend
+```
+
+### 3.9. Cài đặt dependency frontend
+
+```powershell
+npm install
+```
+
+### 3.10. Kiểm tra lint frontend
+
+```powershell
+npm run lint
+```
+
+Kết quả kiểm tra gần nhất:
+
+```text
+Found 0 warnings and 0 errors.
+```
+
+### 3.11. Build frontend
+
+```powershell
+npm run build
+```
+
+Kết quả production build gần nhất: **PASS**.
+
+### 3.12. Khởi động frontend
+
+```powershell
+npm run dev
+```
+
+Frontend chạy tại:
+
+`http://localhost:5173`
+
+Vite proxy các request `/api` sang Spring Boot tại `http://localhost:8081`.
 
 ---
 
@@ -63,111 +183,248 @@ Nhân viên điều phối tiếp nhận phiếu bảo hành cần xử lý, l�
 
 ```text
 PROJECTL4/
-│
 ├── data/
 ├── docs/
 │   ├── ai-disclosure.md
 │   ├── api-contract.md
+│   ├── architecture.drawio
+│   ├── erd.drawio
+│   ├── kiem-thu-bt2.md
 │   ├── srs.md
-│   └── usecase.drawio
+│   ├── thay-doi-thiet-ke.md
+│   ├── usecase.drawio
+│   └── wireframe.drawio
+│
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── client.js
+│   │   ├── components/
+│   │   │   └── DataState.jsx
+│   │   ├── pages/
+│   │   │   ├── TicketList.jsx
+│   │   │   ├── TicketDetail.jsx
+│   │   │   └── TicketReceive.jsx
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
 │
 ├── src/
+│   ├── main/
+│   └── test/
 ├── tests/
-│
-├── .env.example
-├── .gitignore
+├── pom.xml
+├── mvnw
+├── mvnw.cmd
 └── README.md
 ```
 
-### Ý nghĩa
+---
 
-- `docs/`: tài liệu phân tích và đặc tả.
-- `src/`: mã nguồn chương trình.
-- `tests/`: mã kiểm thử.
-- `data/`: dữ liệu mô phỏng.
-- `.env.example`: mẫu các biến môi trường.
-- `.gitignore`: các file/thư mục không đưa lên Git.
-- `README.md`: giới thiệu và trạng thái project.
+## 5. Chức năng chính
+
+### 5.1. Backend REST API
+
+Hệ thống hiện hỗ trợ:
+
+- Lấy danh sách phiếu bảo hành.
+- Lấy danh sách kỹ thuật viên.
+- Lấy thông tin kỹ thuật viên.
+- Xem lịch làm việc của kỹ thuật viên.
+- Phân công kỹ thuật viên cho phiếu bảo hành.
+- Kiểm tra xung đột lịch.
+- Tạo lịch hẹn.
+- Xem danh sách lịch hẹn.
+- Xác nhận lịch hẹn.
+- Hủy lịch hẹn.
+
+### 5.2. Frontend Sprint 2
+
+Frontend React gồm 3 màn hình chính:
+
+1. **Danh sách** – hiển thị các phiếu bảo hành chưa được phân công.
+2. **Chi tiết** – hiển thị thông tin chi tiết của phiếu được chọn.
+3. **Tiếp nhận** – lựa chọn và phân công kỹ thuật viên phù hợp.
+
+Các request HTTP của frontend được tập trung tại:
+
+`frontend/src/api/client.js`
+
+Component:
+
+`frontend/src/components/DataState.jsx`
+
+xử lý các trạng thái dữ liệu:
+
+- Loading
+- Empty
+- Error
+
+Điều này giúp giao diện không bị treo hoặc hiển thị sai khi API đang tải dữ liệu, không có dữ liệu hoặc xảy ra lỗi.
 
 ---
 
-## 5. Tài liệu
-
-| File | Nội dung |
-|---|---|
-| `docs/srs.md` | Đặc tả yêu cầu phần mềm rút gọn |
-| `docs/usecase.drawio` | Use Case Diagram và đặc tả UC4 |
-| `docs/api-contract.md` | Hợp đồng API dành cho Track SE |
-| `docs/ai-disclosure.md` | Khai báo sử dụng công cụ AI |
-
----
-
-## 6. Chạy nhanh sau khi giải nén
-
-Yêu cầu: JDK 21, PostgreSQL đang chạy, database `projectl4` đã được khởi tạo và cấu hình kết nối đúng trong `src/main/resources/application.properties`.
-
-Mở PowerShell tại thư mục `PROJECTL4` và chạy một lệnh:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\kiem-tra-va-chay.ps1
-```
-
-Script sẽ chạy `clean test package`; nếu kiểm thử thành công, ứng dụng sẽ khởi động bằng Spring Boot. Mở `http://localhost:8081/`. Nếu cổng 8081 đã được dùng, hãy đóng ứng dụng đang chạy trước khi chạy lại script.
-
-## 7. Trạng thái hiện tại
+## 6. Tiến độ hiện tại
 
 ### Đã hoàn thành
 
-- [x] Chọn Track SE.
-- [x] Chọn luồng L4 – Phân công kỹ thuật viên & lịch hẹn.
-- [x] Xác định phạm vi bài toán.
-- [x] Xây dựng User Story.
-- [x] Phân loại yêu cầu theo MoSCoW.
-- [x] Viết Acceptance Criteria theo Given–When–Then.
-- [x] Xác định FR và NFR.
-- [x] Hoàn thành SRS rút gọn.
-- [x] Hoàn thành Use Case Diagram.
-- [x] Đặc tả chi tiết UC4 – Phân công kỹ thuật viên.
-- [x] Xây dựng API Contract.
-- [x] Tạo bảng khai báo sử dụng AI.
+- [x] Xây dựng backend Java Spring Boot.
+- [x] Kết nối PostgreSQL.
+- [x] Quản lý schema bằng Flyway.
+- [x] Xây dựng REST API cho module L4.
+- [x] Quản lý phiếu bảo hành.
+- [x] Quản lý kỹ thuật viên.
+- [x] Phân công kỹ thuật viên.
+- [x] Kiểm tra điều kiện nghiệp vụ khi phân công.
+- [x] Tạo và quản lý lịch hẹn.
+- [x] Kiểm tra xung đột lịch.
+- [x] Xác nhận và hủy lịch hẹn.
+- [x] Xây dựng frontend bằng React + Vite.
+- [x] Xây dựng 3 màn hình Danh sách / Chi tiết / Tiếp nhận.
+- [x] Kết nối frontend với REST API thật qua `src/api/client.js`.
+- [x] Xây dựng `DataState` cho Loading / Empty / Error.
+- [x] Kiểm tra Empty state.
+- [x] Kiểm tra Error/Conflict flow.
+- [x] Kiểm tra End-to-End với PostgreSQL thực tế.
+- [x] Frontend lint: 0 warnings, 0 errors.
+- [x] Frontend production build PASS.
+- [x] Backend: 9 tests PASS.
 
-### Chưa hoàn thành
+### Kết quả End-to-End
 
-- [ ] Xây dựng mã nguồn Spring Boot.
-- [ ] Thiết kế và khởi tạo cơ sở dữ liệu PostgreSQL.
-- [ ] Cài đặt các API.
-- [ ] Viết unit test/integration test.
-- [ ] Kiểm thử chức năng với dữ liệu mô phỏng.
+Luồng nghiệp vụ đã được kiểm tra:
+
+```text
+PostgreSQL
+    ↓
+Spring Boot REST API
+    ↓
+React – Danh sách
+    ↓
+React – Chi tiết
+    ↓
+React – Tiếp nhận
+    ↓
+Phân công kỹ thuật viên
+    ↓
+Spring Boot cập nhật PostgreSQL
+```
+
+Kết quả kiểm chứng:
+
+- Phiếu: `WT-2026-003`
+- Trạng thái: `UNASSIGNED → ASSIGNED`
+- `ticket_id = 3`
+- `technician_id = 3`
+- Assignment status: `ASSIGNED`
+- Kỹ thuật viên: `Le Minh Khoa`
+- `current_workload = 1`
+
+Luồng ngoại lệ cũng đã được kiểm tra: khi lựa chọn kỹ thuật viên không phù hợp với điều kiện nghiệp vụ, backend trả về Conflict và frontend hiển thị trạng thái Error thay vì bị treo.
 
 ---
 
-## 7. Dữ liệu
+## 7. Kiểm thử
 
-Project dự kiến sử dụng khoảng **100 bản ghi dữ liệu mô phỏng** phục vụ quá trình phát triển và kiểm thử.
+### 7.1. Backend
+
+Lệnh kiểm thử:
+
+```powershell
+.\mvnw.cmd clean test
+```
+
+Kết quả gần nhất:
+
+```text
+Tests run: 9
+Failures: 0
+Errors: 0
+Skipped: 0
+BUILD SUCCESS
+```
+
+Trong đó có 8 bài kiểm tra quy tắc nghiệp vụ và 1 bài kiểm tra Spring context.
+
+Bộ kiểm thử bao gồm luồng hợp lệ và các trường hợp biên/ngoại lệ của module L4.
+
+### 7.2. Frontend lint
+
+```powershell
+npm run lint
+```
+
+Kết quả:
+
+```text
+Found 0 warnings and 0 errors.
+```
+
+### 7.3. Frontend production build
+
+```powershell
+npm run build
+```
+
+Kết quả: **PASS**.
 
 ---
 
-## 8. Ghi chú
+## 8. Tài liệu và minh chứng
 
-Các tài liệu yêu cầu và thiết kế có thể tiếp tục được cập nhật trong các buổi tiếp theo của học phần.
+Các tài liệu được lưu tại thư mục `docs/`, bao gồm:
 
-Việc sử dụng công cụ AI được khai báo tại:
+- SRS
+- API Contract
+- Architecture Diagram
+- ERD
+- Wireframe
+- Use Case
+- Nhật ký thay đổi thiết kế
+- Kiểm thử BT2
+- AI Disclosure
+- Ảnh minh chứng Sprint 2
+
+Ảnh minh chứng Sprint 2 cần thể hiện đầy đủ luồng:
+
+1. Màn hình danh sách phiếu bảo hành.
+2. Màn hình chi tiết phiếu.
+3. Màn hình tiếp nhận và phân công.
+4. Kết quả End-to-End sau khi phân công thành công.
+
+---
+
+## 9. Git Convention
+
+Repository sử dụng Conventional Commits.
+
+Ví dụ:
+
+```text
+feat: add React warranty workflow
+fix: handle frontend data states
+test: verify L4 business rules
+docs: update Sprint 2 progress
+```
+
+Repository:
+
+`https://github.com/taikon47/cdtn1-phamcongtai-l4`
+
+---
+
+## 10. Ghi chú
+
+Không commit các thư mục được sinh tự động:
+
+```text
+target/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+```
+
+Khai báo sử dụng công cụ AI được lưu tại:
 
 `docs/ai-disclosure.md`
-
-### Các phần bổ sung trong bản cập nhật L4
-
-- **Hủy lịch hẹn:** `PATCH /api/v1/appointments/{appointmentId}/cancel`; lịch đã hoàn tất không thể bị hủy.
-- **Lọc lịch hẹn:** lọc tại giao diện theo ngày, trạng thái và kỹ thuật viên; không thay đổi dữ liệu gốc từ API.
-- **Thống kê tổng quan:** tổng số lịch, lịch chờ xác nhận, lịch đã xác nhận và lịch sắp diễn ra được tính từ dữ liệu API thật.
-- **Phản hồi giao diện:** có xác nhận trước khi hủy, trạng thái đang xử lý và thông báo thành công/lỗi.
-
-Lưu ý: cần chạy ứng dụng với PostgreSQL của máy và tự chụp ảnh màn hình thực tế để bổ sung vào báo cáo trước khi nộp. Không xem các ảnh placeholder trong bản báo cáo là bằng chứng kiểm thử.
-
-## 9. Kiểm thử BT2 (bản bàn giao)
-
-Chạy `./mvnw.cmd clean test` trên Windows sau khi đặt `JAVA_HOME` trỏ tới JDK 21. Thư mục `src/test/java` chứa bài kiểm tra khởi động Spring Boot và 8 bài kiểm tra quy tắc nghiệp vụ độc lập với database: tạo lịch hợp lệ, khoảng giờ sát nhau, trùng giờ, giờ không hợp lệ, ngày quá khứ, hủy lịch đã xác nhận, từ chối hủy lịch hoàn tất và xác nhận lịch chờ.
-
-**Lưu ý:** Bài kiểm tra sát giờ dùng repository mock để mô phỏng không trùng lịch; chưa phải integration test xác minh truy vấn SQL thực tế. Test khởi động ứng dụng yêu cầu PostgreSQL theo `application.properties`. Cần chạy lại trên máy nộp bài và lưu log thực tế.
-
-**Đính chính tiến độ:** Các checklist "chưa hoàn thành" tại mục 7 phía trên phản ánh trạng thái BT1 trước khi triển khai. Trong BT2 hiện đã có Java/Spring Boot, PostgreSQL/Flyway, REST API và bộ test tại `src/test/java`.
