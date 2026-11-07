@@ -127,7 +127,9 @@ public class L4ApiController {
         return assignments.save(assignment);
     }
 
+    // VALIDATE APPOINTMENT
     private AppointmentBody validate(AppointmentBody b) {
+
         if (b == null
                 || b.ticketId() == null
                 || b.technicianId() == null
@@ -135,6 +137,7 @@ public class L4ApiController {
                 || b.appointmentDate() == null
                 || b.startTime() == null
                 || b.endTime() == null) {
+
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "Vui lòng nhập đầy đủ thông tin lịch hẹn.");
@@ -149,16 +152,33 @@ public class L4ApiController {
                     "Loại lịch hẹn phải là RECEIVE hoặc RETURN.");
         }
 
+        // Không cho phép đặt lịch vào ngày trong quá khứ
         if (b.appointmentDate().isBefore(LocalDate.now())) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "Ngày hẹn không được nằm trong quá khứ.");
         }
 
+        // Kiểm tra giờ kết thúc
         if (!b.endTime().isAfter(b.startTime())) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "Giờ kết thúc phải sau giờ bắt đầu.");
+        }
+
+        // BUG-01 FIX:
+        // Không cho phép đặt lịch có thời gian bắt đầu đã qua,
+        // kể cả khi ngày hẹn là ngày hôm nay.
+        LocalDateTime appointmentStart = LocalDateTime.of(
+                b.appointmentDate(),
+                b.startTime()
+        );
+
+        if (appointmentStart.isBefore(LocalDateTime.now())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Thời gian bắt đầu lịch hẹn không được nằm trong quá khứ."
+            );
         }
 
         if (!tickets.existsById(b.ticketId())) {
@@ -183,8 +203,10 @@ public class L4ApiController {
     }
 
     private boolean conflict(AppointmentBody b) {
+
         LocalDateTime start =
                 b.appointmentDate().atTime(b.startTime());
+
         LocalDateTime end =
                 b.appointmentDate().atTime(b.endTime());
 
