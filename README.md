@@ -6,7 +6,45 @@
 **MSSV:** 2374802010445  
 **Track:** Software Engineering (SE)  
 **Học phần:** Chuyên đề Tốt nghiệp 1  
-**Học kỳ:** HK1 – Năm học 2026–2027
+**Học kỳ:** HK1 – Năm học 2026–2027  
+**GitHub Repo (Public):** https://github.com/taikon47/cdtn1-phamcongtai-l4  
+**Release Tag:** `v1.0`
+
+---
+
+## KHỞI CHẠY HỆ THỐNG (ĐÚNG 2 LỆNH - TIÊU CHUẨN BÀI TẬP 3 C1)
+
+Từ một máy trắng chỉ có Docker và Git (không cần cài Java, Node hay PostgreSQL):
+
+```bash
+# Lệnh 1: Thiết lập biến môi trường từ mẫu
+cp .env.example .env
+
+# Lệnh 2: Khởi dựng toàn bộ hệ thống và tự động nạp dữ liệu mẫu
+docker compose up -d --build
+```
+
+### Cách kiểm tra hệ thống đã chạy đúng (Verify it works):
+1. **Kiểm tra trạng thái dịch vụ:**
+   ```bash
+   docker compose ps
+   # Kết quả mong đợi: Cả smartcrm_l4_app và smartcrm_l4_db đều ở trạng thái (healthy)
+   ```
+2. **Kiểm tra Health Endpoint:**
+   ```bash
+   curl -s http://localhost:8081/health
+   # Kết quả mong đợi: {"status":"ok","db":"up"}
+   ```
+3. **Mở giao diện Web Điều phối L4:**
+   Truy cập trình duyệt: `http://localhost:8081/`
+4. **Chạy bộ kiểm thử tự động (12 test case đạt 100% PASS):**
+   ```bash
+   # Chạy trên máy host:
+   ./mvnw test -Dtest=L4BT3VerificationTests
+   
+   # Hoặc chạy bên trong container Docker:
+   docker compose exec app ./mvnw test -Dtest=L4BT3VerificationTests
+   ```
 
 ---
 

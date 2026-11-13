@@ -1,42 +1,39 @@
-# AI DISCLOSURE
+# AI DISCLOSURE – BẢNG KHAI BÁO SỬ DỤNG CÔNG CỤ AI
+## Cập nhật toàn diện cho Giai đoạn 3 (Bài tập 3: Kiểm thử và Đóng gói Prototype)
 
-**Sinh viên:** Phạm Công Tài  
-**MSSV:** 2374802010445  
-**Track:** SE  
-**Luồng nghiệp vụ:** L4 – Phân công kỹ thuật viên & lịch hẹn
-
----
-
-## I. MỤC ĐÍCH KHAI BÁO
-
-Tài liệu này ghi nhận việc sử dụng công cụ AI trong quá trình thực hiện project L4 – Phân công kỹ thuật viên & lịch hẹn.
-
-AI được sử dụng với vai trò hỗ trợ giải thích yêu cầu, gợi ý cấu trúc tài liệu, rà soát tính nhất quán và hỗ trợ xây dựng một số nội dung kỹ thuật. Sinh viên trực tiếp kiểm tra, đối chiếu, chỉnh sửa và chịu trách nhiệm về toàn bộ nội dung trước khi sử dụng và nộp bài.
+- **Sinh viên:** Phạm Công Tài  
+- **MSSV:** 2374802010445  
+- **Track:** Software Engineering (SE)  
+- **Luồng nghiệp vụ:** L4 – Phân công kỹ thuật viên & lịch hẹn
+- **Học kỳ:** HK1 – Năm học 2026–2027
 
 ---
 
-## II. BẢNG KHAI BÁO CHI TIẾT
+### I. MỤC ĐÍCH KHAI BÁO VÀ CHÍNH SÁCH LIÊM CHÍNH HỌC THUẬT
 
-| Công cụ AI | Dùng vào việc gì | Áp dụng ở phần nào (File / Mục) | Đã kiểm chứng & chỉnh sửa thế nào |
-|---|---|---|---|
-| ChatGPT | Giải thích yêu cầu bài tập, xác định luồng nghiệp vụ và phạm vi thực hiện | Phiếu phạm vi cá nhân – L4 | Đối chiếu với mô tả L4 do giảng viên cung cấp và đọc lại phạm vi trước khi sử dụng |
-| ChatGPT | Gợi ý cách viết User Story và phạm vi chức năng | Phiếu phạm vi; `docs/srs.md` – Mục 3 | Đọc lại từng User Story, đối chiếu với phạm vi L4 và loại bỏ nội dung ngoài phạm vi |
-| ChatGPT | Hỗ trợ xây dựng SRS gồm User Story, GWT, FR, NFR, quy tắc nghiệp vụ và bảng truy vết | `docs/srs.md` | Đối chiếu US–FR–Use Case, kiểm tra bảng truy vết không có ô trống và đọc lại các yêu cầu |
-| ChatGPT | Hỗ trợ xây dựng sơ đồ Use Case và đặc tả UC4 | `docs/usecase.drawio` | Mở file bằng draw.io, kiểm tra Actor, UC1–UC8, quan hệ và luồng ngoại lệ UC4 |
-| ChatGPT | Gợi ý thiết kế API, Request/Response, HTTP Status và Validation | `docs/api-contract.md` | Đối chiếu API1–API8 với US1–US8 và FR1–FR8 trong SRS; kiểm tra JSON và HTTP method |
-| ChatGPT | Hỗ trợ trình bày thông tin project và trạng thái thực hiện | `README.md` | Đối chiếu cấu trúc thư mục thực tế và đánh dấu đúng các phần đã/chưa hoàn thành |
-| ChatGPT | Gợi ý cấu hình các file hỗ trợ project | `.gitignore`, `.env.example` | Kiểm tra `.env` thật bị loại khỏi Git và `.env.example` chỉ chứa giá trị mẫu |
-| ChatGPT | Hỗ trợ đề xuất kiến trúc hệ thống phân lớp và lập luận kiến trúc dựa trên NFR | `docs/architecture.drawio` | Đối chiếu với SRS, API Contract và NFR1–NFR3; kiểm tra các layer, luồng xử lý và phạm vi L4 trước khi sử dụng |
-| ChatGPT | Hỗ trợ xây dựng ERD, xác định thực thể, PK/FK và quan hệ dữ liệu | `docs/erd.drawio` | Đối chiếu với BR1–BR6 trong SRS; kiểm tra 4 bảng WARRANTY_TICKET, TECHNICIAN, ASSIGNMENT, APPOINTMENT và các quan hệ trước khi sử dụng |
-| ChatGPT | Hỗ trợ xây dựng PostgreSQL DDL từ ERD | `data/schema.sql` | Đối chiếu từng bảng, PK, FK, UNIQUE, CHECK và INDEX với ERD và các quy tắc nghiệp vụ trong SRS |
-| ChatGPT | Hỗ trợ phác thảo wireframe cho luồng phân công kỹ thuật viên và lịch hẹn | `docs/wireframe.drawio` | Đối chiếu với UC1–UC8 và SRS; kiểm tra luồng từ phiếu chờ phân công → chọn KTV → tạo và xác nhận lịch hẹn |
+Tài liệu này ghi nhận trung thực và đầy đủ việc sử dụng công cụ Trí tuệ Nhân tạo (AI) trong suốt Giai đoạn 3 của học phần Chuyên đề tốt nghiệp 1.
+- **Quyền hạn được phép:** Sinh viên sử dụng AI để gợi ý cấu trúc cú pháp Dockerfile/Compose, hỗ trợ tìm nguyên nhân lỗi (debugging), gợi ý mẫu bảng biểu tài liệu kỹ thuật tiếng Anh.
+- **Trách nhiệm bắt buộc:** Toàn bộ mã nguồn, cấu hình Docker, các test case kiểm thử và dữ liệu trong báo cáo đều do sinh viên tự chạy thực tế trên máy tính, tự kiểm chứng tính đúng đắn và hiểu rõ 100% khi được Giảng viên chất vấn.
 
 ---
 
-## III. CAM KẾT
+### II. BẢNG KHAI BÁO CHI TIẾT GIAI ĐOẠN 3 (BÀI TẬP 3)
 
-**"Tôi xác nhận đã đọc, hiểu và chịu trách nhiệm về toàn bộ nội dung nộp."**
+| Công cụ AI | Dùng vào việc gì | Áp dụng ở tệp / hàm nào | Sinh viên đã kiểm chứng thế nào |
+|:---|:---|:---|:---|
+| **ChatGPT / Antigravity** | Gợi ý cấu trúc `Dockerfile` multi-stage build cho Spring Boot 4.0 (Java 21) và cấu hình `HEALTHCHECK` | `Dockerfile`, `docker-compose.yml` | Đọc tài liệu chính thức của Docker. Tự kiểm bằng lệnh `docker compose ps` để kiểm tra trạng thái `healthy`; thử dừng dịch vụ database để xác nhận ứng dụng báo lỗi kết nối có kiểm soát. |
+| **ChatGPT / Antigravity** | Hỗ trợ tìm nguyên nhân và viết ca kiểm thử tái lập cho lỗi đặt lịch hẹn trong quá khứ (`BUG-01`) | `src/main/java/.../L4ApiController.java`, `L4BT3VerificationTests.java` | Sinh viên tự chạy test `TC-07` (`sameDayAppointmentInPastIsRejected`) trước khi sửa (bị FAIL) và sau khi bổ sung so sánh `LocalDateTime` (chạy PASS). |
+| **ChatGPT / Antigravity** | Hỗ trợ cấu hình bộ 12 test case chuyên biệt bao phủ 5 nhóm kiểm thử chuẩn theo rubric BT3 | `src/test/java/.../L4BT3VerificationTests.java` | Chạy lệnh `./mvnw test -Dtest=L4BT3VerificationTests` trên terminal thực tế, xác nhận toàn bộ 12 test case đều PASS với thời gian thực thi 0.039 giây. |
+| **ChatGPT / Antigravity** | Gợi ý khung tài liệu tiếng Anh theo chuẩn ngành (Deployment Guide 5 mục, REST API Docs 7 mục) | `docs/deployment-guide.md`, `docs/api-docs.md` | Đối chiếu từng endpoint với code Java thật; tự chạy API bằng Postman/curl và chép đúng dữ liệu JSON phản hồi thực tế vào tài liệu, không dùng dữ liệu giả định. |
+| **ChatGPT** | Gợi ý giải pháp nạp dữ liệu mẫu Idempotent không gây lỗi khi chạy lại lần 2 (`ON CONFLICT DO UPDATE`) | `db/init/002_seed_danh_muc.sql` | Chạy lệnh nạp SQL hai lần liên tiếp vào PostgreSQL, kiểm tra số dòng qua `SELECT count(*) FROM technician` không bị nhân đôi (đạt chuẩn C8). |
+| *— Không dùng AI —* | Toàn bộ nghiệp vụ cốt lõi L4, logic phân công kỹ thuật viên, cấu trúc cơ sở dữ liệu và bảo mật | `src/main/java/.../service/`, `src/main/resources/`, `db/init/001_create_tables.sql` | Sinh viên tự thiết kế, tự xây dựng và chịu trách nhiệm toàn bộ. |
+
+---
+
+### III. CAM KẾT LIÊM CHÍNH HỌC THUẬT
+
+**"Tôi xác nhận đã đọc, hiểu và chịu trách nhiệm về toàn bộ nội dung nộp. Mọi test case và kết quả kiểm thử trong báo cáo đều đã được thực thi thật và sẵn sàng chạy lại trước mặt Giảng viên."**
 
 **Họ và tên:** Phạm Công Tài  
 **MSSV:** 2374802010445  
-**Ngày:** 10/10/2026
+**Ngày hoàn thiện:** 13/11/2026

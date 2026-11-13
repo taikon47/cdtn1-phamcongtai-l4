@@ -42,3 +42,28 @@
 - Các bộ lọc là lọc hiển thị phía client; API danh sách vẫn trả toàn bộ lịch theo thời gian bắt đầu.
 
 Các thay đổi trên cần được kiểm chứng bằng cách chạy ứng dụng với PostgreSQL, thử các trạng thái `PENDING`, `CONFIRMED`, `CANCELLED`, `COMPLETED`, và chụp ảnh màn hình thực tế trước khi nộp.
+
+
+## 6. Thay đổi thiết kế và nâng cấp đóng gói ở Bài tập 3 (BT3) (13/11/2026)
+
+Mục này ghi nhận toàn bộ các quyết định kỹ thuật và thay đổi tích lũy khi chuyển giao hệ thống từ Bài tập 2 sang Bài tập 3, tuân thủ nguyên tắc: **thay đổi gì · vì sao · ảnh hưởng tới thành phần nào**.
+
+### 6.1. Bổ sung Endpoint Giám sát `/health` phục vụ Docker Healthcheck
+- **Thay đổi gì:** Xây dựng `HealthController.java` lắng nghe `GET /health` để truy vấn kiểm tra kết nối PostgreSQL (`SELECT 1`) và trả về `{"status":"ok","db":"up"}` với mã HTTP 200.
+- **Vì sao:** Docker compose cần cơ chế healthcheck tin cậy để xác định chính xác ứng dụng đã kết nối CSDL thành công trước khi coi là sẵn sàng (`healthy`), khắc phục lỗi `BUG-04`.
+- **Ảnh hưởng:** `src/main/java/.../HealthController.java`, `Dockerfile`, `docker-compose.yml`, `docs/deployment-guide.md`, `docs/api-docs.md`.
+
+### 6.2. Đóng gói Môi trường Tái lập Toàn diện với Docker & Docker Compose (Mức 3)
+- **Thay đổi gì:** Xây dựng `Dockerfile` đa tầng (multi-stage build dựa trên Eclipse Temurin 21 Alpine) và tệp điều phối `docker-compose.yml` gồm 2 dịch vụ (`smartcrm_l4_app` và `smartcrm_l4_db`).
+- **Vì sao:** Đạt chuẩn đầu ra CLO4 và tiêu chí CỐT LÕI C1 của BT3: chuyển từ mức tái lập 2 (cài đặt môi trường thủ công trên máy host) sang mức tái lập 3 (đóng gói toàn bộ runtime, thư viện và CSDL trong container, chạy bằng $\le$ 2 lệnh).
+- **Ảnh hưởng:** Thêm mới `Dockerfile`, `docker-compose.yml`, `.dockerignore`, cập nhật `.env.example` và `README.md`.
+
+### 6.3. Chuẩn hóa Bộ kiểm thử 12 Ca kiểm chứng BT3 (`L4BT3VerificationTests.java`)
+- **Thay đổi gì:** Bổ sung lớp kiểm thử `L4BT3VerificationTests.java` chứa đúng 12 test case bám sát 5 nhóm yêu cầu của rubric BT3 (Luồng đúng, Giá trị biên, Dữ liệu sai, Bảo mật OWASP A01, Tính tái lập).
+- **Vì sao:** Cung cấp bộ kiểm thử chuẩn hóa, chạy độc lập cực nhanh (~0.04s) bằng một lệnh duy nhất, giúp giảng viên dễ dàng chọn ngẫu nhiên một test case để chạy lại tại chỗ mà không gặp lỗi môi trường.
+- **Ảnh hưởng:** `src/test/java/.../L4BT3VerificationTests.java`, `docs/test-plan.md`, `docs/test-report.md`.
+
+### 6.4. Cơ chế Nạp Dữ liệu Mẫu Idempotent tự động qua `db/init/`
+- **Thay đổi gì:** Chuyển các lệnh tạo bảng và nạp dữ liệu mẫu vào thư mục `db/init/` (`001_create_tables.sql` và `002_seed_danh_muc.sql`) và sử dụng mệnh đề `ON CONFLICT DO UPDATE`.
+- **Vì sao:** Postgres container tự động thực thi các tệp này khi khởi động. Kỹ thuật `ON CONFLICT` đảm bảo tiêu chí kiểm chứng C8: chạy lại lần 2 không phát sinh lỗi trùng khóa chính và không nhân đôi dữ liệu.
+- **Ảnh hưởng:** `db/init/`, `docker-compose.yml`, `docs/deployment-guide.md`.
